@@ -1,0 +1,71 @@
+LOGYM MOBILE - PAINEL GERENTE/ADMIN + CORRECOES
+================================================
+
+Esta versao foi criada a partir de LOGYM-Mobile-Pronto-TCC(3).zip.
+
+CORRECOES IMPORTANTES
+---------------------
+1. O backend usa o nivel MANAGER para gerente (nao GERENTE).
+   Por isso o gerente agora recebe corretamente:
+   Academias | Painel | Perfil
+
+2. ADMIN recebe:
+   Academias | Painel | Perfil
+
+3. USER continua recebendo:
+   Academias | Favoritos | Perfil
+
+4. Favoritos sao exclusivos de USER:
+   - gerente/admin nao buscam favoritos;
+   - estrela nao aparece na Home;
+   - estrela nao aparece em Detalhes;
+   - acesso manual a /favoritos redireciona gerente/admin para /painel.
+
+5. Avaliacoes:
+   - gerente/admin podem consultar as avaliacoes existentes;
+   - nao podem avaliar, editar ou excluir avaliacao pelo Mobile;
+   - USER continua com o comportamento normal.
+
+6. Painel Mobile:
+   - identifica MANAGER ou ADMIN usando GET /usuarios/me;
+   - mostra as funcoes disponiveis no Mobile;
+   - mostra as funcoes mantidas no Web;
+   - botao Abrir painel Web esta funcional;
+   - MANAGER abre /painel-gerente;
+   - ADMIN abre /painel-admin.
+
+7. Sincronizacao de sessao Web x Mobile Web:
+   - se o Expo Web abrir em localhost, o Mobile redireciona automaticamente
+     para 127.0.0.1 mantendo porta e rota;
+   - assim o JSESSIONID do Mobile Web fica separado do Web em localhost;
+   - a listagem de avaliacoes nao envia mais usuarioId local.
+
+ARQUIVOS ALTERADOS/CRIADOS
+--------------------------
+app/_layout.tsx
+app/academias.tsx
+app/detalhes.tsx
+app/favoritos.tsx
+app/perfil.tsx
+app/painel.tsx (novo)
+components/BottomTabBar.tsx
+lib/api.ts
+lib/permissoes.ts (novo)
+
+TESTES FEITOS NESTE PACOTE
+--------------------------
+npx tsc --noEmit -> OK
+npx expo export --platform web -> OK
+Rota /painel gerada corretamente -> OK
+
+COMO RODAR
+----------
+npm install
+npx expo start -c
+
+Para testar duas contas no mesmo PC:
+Web:        http://localhost:5173
+Mobile Web: http://127.0.0.1:<porta-do-expo>
+
+Se voce abrir o Mobile Web em localhost, esta versao faz o redirecionamento
+para 127.0.0.1 automaticamente.

@@ -1,0 +1,57 @@
+LOGYM MOBILE - VERSÃO ESTÁVEL PARA O TCC
+=========================================
+
+Esta versão foi organizada para manter o visual e as funcionalidades já aprovadas até a etapa da galeria de fotos da academia, sem a alteração visual posterior da tela de detalhes.
+
+O que está incluído:
+- Login usando a sessão real do Spring Security (/login + /usuarios/me)
+- Home com logo e filtros dinâmicos de categorias/facilidades
+- Academias ordenadas por proximidade do CEP do usuário
+- Fotos e fallback das academias
+- Favoritos sincronizados com o backend
+- Perfil, CEP/ViaCEP e foto de perfil
+- Avaliação por critérios
+- Tratamento de academia/avaliação suspensa
+- Galeria de fotos na tela de detalhes
+- Logout encerrando também a sessão no backend
+- Validação de /usuarios/me ao abrir Home, Favoritos, Perfil e Detalhes
+
+IMPORTANTE PARA TESTAR WEB + MOBILE WEB COM CONTAS DIFERENTES
+--------------------------------------------------------------
+O Spring Security usa cookie de sessão (JSESSIONID). Cookies não são separados por porta.
+
+Para manter uma conta no Web e outra no Mobile Web simultaneamente, use hosts diferentes:
+
+Web do projeto:
+  http://localhost:5173
+
+Mobile pelo Expo Web:
+  http://127.0.0.1:8081
+
+A porta do Expo pode mudar. Se ele abrir, por exemplo, em localhost:8082, abra manualmente:
+  http://127.0.0.1:8082
+
+O Mobile escolhe automaticamente o backend pelo hostname usado no navegador:
+- Mobile em 127.0.0.1 -> API em 127.0.0.1:8080
+- Mobile em localhost    -> API em localhost:8080
+
+O backend do projeto já aceita localhost e 127.0.0.1 no CORS.
+
+COMO RODAR
+----------
+1. Inicie o backend Spring Boot na porta 8080.
+2. Na pasta deste Mobile, execute:
+
+   npm install
+   npx expo start -c
+
+3. Para Expo Go, use o QR Code normalmente.
+4. Para o navegador, abra o endereço do Expo trocando localhost por 127.0.0.1 quando quiser usar uma conta diferente da conta aberta no Web.
+
+VALIDAÇÕES FEITAS NESTA ENTREGA
+-------------------------------
+- TypeScript: npx tsc --noEmit -> sem erros.
+- Build Web/Expo: expo export --platform web -> concluído com sucesso.
+- Rotas mantidas diretamente em /app (sem grupo (protected)).
+- SessionGuard removido para não interferir na navegação.
+
