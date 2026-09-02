@@ -15,7 +15,7 @@ import { Platform, View } from 'react-native';
 // Mobile Web: 127.0.0.1 -> backend 127.0.0.1:8080
 //
 // Os cookies ficam separados e uma conta não troca a sessão da outra.
-// ================================================================
+// ==========================================================
 
 export default function RootLayout() {
   const [hostPreparado, setHostPreparado] = useState(Platform.OS !== 'web');
